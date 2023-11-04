@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="Liste" style="min-height: 100vh; background-color: darkgray;">
+        <nav class="nav justify-content-around align-content-center py-3 bg-primary mb-5">
+            <h1 class="text-warning" href="#" aria-current="page">Görev Listesi</h1>
+        </nav>
+        <div class="container justify-content-center">
+            <form action="">
+                <div class="input-group">
+                    <button id="btnEkle" type="button" class="btn btn-secondary ">Görev Ekle</button>
+                    <input class="form-control" type="text" name="" id="taskText" placeholder="Görev Bilisi">
+                    <input class="form-control" type="datetime-local" id="taskHour">
+                </div>
+            </form>
+        </div>
+        <div id="liste" class="container justify-content-center my-3">
+            <div class="table-responsive">
+                <table class="table table-primary ">
+                    <thead>
+                        <tr id="baslik">
+                            <th class="baslik" scope="col">Görev NO</th>
+                            <th class="baslik" scope="col">Görev Acıklama</th>
+                            <th class="baslik" scope="col">Görev Süre</th>
+                            <th class="baslik" scope="col">Kontrol</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Javascript-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    
+    let day = new Date;
+    let görevListesi = 
+    [
+    {"görevNo": 1,"görevAçiklama":'lorem ipsum dolor',"görevSüre":3 +'gün'},
+    {"görevNo": 2,"görevAçiklama":"lorem ipsum dolor","görevSüre":3 +'gün'},
+    {"görevNo": 3,"görevAçiklama":'lorem ipsum dolor',"görevSüre":3 +'gün'}
+    ]
+    TaskWrite();
+    console.log(document.getElementById('liste').children[0].children[0].children[0].nextElementSibling)
+    function TaskWrite() {
+        document.querySelector('tbody').innerHTML="";
+        for(let index of görevListesi){
+        let liste = `<tr class="">
+                            <td scope="row">${index.görevNo}</td>
+                            <td>${index.görevAçiklama}</td>
+                            <td>${index.görevSüre}</td>
+                            <td><input type="checkbox" name="" id="${index.görevNo}"></td>
+                        </tr>`;
+        document.getElementById('liste').children[0].children[0].children[0].nextElementSibling.insertAdjacentHTML("beforeend",liste)
+    }
+    
+    }
+
+
+   //let btnSize=10;
+    //let btnEkle= document.querySelector('#btnEkle');Görev Ekleme butonumuza erişip bir değişkene aktardık
+   // btnEkle.addEventListener('click',function () {burdada butonumuzda bir click tıklama olayı olduğunda calışıcak fonksiyonu belirttik
+   //     console.log('Butona basıldı')
+    //})
+    document.querySelector('#btnEkle').addEventListener("click",newTask);//burda butona bir event(olay) atıyoruz ilk önce calışma durumu sonrada olayın ismini yazıyoruz
+    function newTask(event) {//sonrada yazdığımız ismi fonksiyon ismine yazıyorz ve fonksiyon butona basılma durumunda calışıcak hale geliyor
+        // console.log("Butona Basıldı");
+        // btnSize++;
+        // console.log(event.target);//burda olayı tetikleyen butona ulaşıyorum
+        // event.target.style.padding = btnSize+'px';//btnSize değikeni ile butonun padding değişkenini büyütüyorum
+        // event.preventDefault();
+        var dateInput = document.getElementById("taskHour").value;
+        var selectedDate = new Date(dateInput);
+
+        var datetime2 = new Date(); // İkinci datetime türündeki tarih
+
+        var differenceInMilliseconds = datetime2 - selectedDate; // İki tarih arasındaki farkı hesapla (milisaniye cinsinden)
+        var differenceInSeconds = differenceInMilliseconds / 1000; // Saniye cinsinden farkı hesapla
+        var differenceInMinutes = differenceInSeconds / 60; // Dakika cinsinden farkı hesapla
+        var differenceInHours = differenceInMinutes / 60; // Saat cinsinden farkı hesapla
+        console.log(dateInput);
+        if (dateInput == '') {
+            alert('Tarih secilmedi')
+        }
+        else if(document.getElementById("taskText").value == ''){
+           alert('Görev bilgisi boş')
+        }
+        else{
+            görevListesi.push({"görevNo":1,"görevAçiklama":document.getElementById("taskText").value,"görevSüre":(differenceInHours.toFixed(0)*-1)+" saat "+((differenceInMinutes.toFixed(0)%60)*-1)+" dakika"})
+        TaskWrite();
+        }
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="Liste py-5" style="min-height: 100vh; background-color: darkgray;">
+        <div class="navbar bg-primary">
+            <div class="container justify-content-center">
+                <h1 class="text-white">Görev Listesi</h1>
+            </div>
+        </div>
+        <div class="input-group">
+            <button id="btnEkle" type="button" class="btn btn-secondary">Görev Ekle</button>
+            <input class="form-control" type="text" name="" id="taskText">
+            <input class="form-control" type="datetime-local" id="taskHour">
+        </div>
+        <div id="liste" class="container justify-content-center my-3">
+            <div class="table-responsive">
+                <table class="table table-primary">
+                    <thead>
+                        <tr id="baslik">
+                            <th class="baslik" scope="col">Görev NO</th>
+                            <th class="baslik" scope="col">Görev Acıklama</th>
+                            <th class="baslik" scope="col">Görev Süre</th>
+                            <th class="baslik" scope="col">Kontrol</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="silinicekObje" class="">
+                            <td scope="row">R1C1</td>
+                            <td>R1C2</td>
+                            <td>R1C3</td>
+                            <td><input type="checkbox" name="" id=""></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+     let btnSize=10;
+    let btnEkle= document.querySelector('#btnEkle');//Görev Ekleme butonumuza erişip bir değişkene aktardık
+    btnEkle.addEventListener('click',function () {//burdada butonumuzda bir click tıklama olayı olduğunda calışıcak fonksiyonu belirttik
+        console.log('Butona basıldı')
+    })
+    document.querySelector('#btnEkle').addEventListener("click",newTask);//burda butona bir event(olay) atıyoruz ilk önce calışma durumu sonrada olayın ismini yazıyoruz
+    function newTask(event) {//sonrada yazdığımız ismi fonksiyon ismine yazıyorz ve fonksiyon butona basılma durumunda calışıcak hale geliyor
+         console.log("Butona Basıldı");
+         btnSize++;
+         console.log(event.target);//burda olayı tetikleyen butona ulaşıyorum
+         event.target.style.padding = btnSize+'px';//btnSize değikeni ile butonun padding değişkenini büyütüyorum
+         event.preventDefault();
+    }
+   let görevListesi = 
+    [
+    {"görevNo": 1,"görevAçıklamam":'lorem ipsum dolor',"görevSüre":3 +'gün'},
+    {"görevNo": 2,"görevAçıklamam":"lorem ipsum dolor","görevSüre":3 +'gün'},
+    {"görevNo": 3,"görevAçıklamam":'lorem ipsum dolor',"görevSüre":3 +'gün'}
+    ]
+    console.log(document.getElementById('liste').children[0].children[0].children[0].nextElementSibling)
+    for(let index of görevListesi){
+        let liste = `<tr class="">
+                            <td scope="row">${index.görevNo}</td>
+                            <td>${index.görevAçıklamam}</td>
+                            <td>${index.görevSüre}</td>
+                            <td><input type="checkbox" name="" id="${index.görevNo}"></td>
+                        </tr>`;
+        document.getElementById('liste').children[0].children[0].children[0].nextElementSibling.insertAdjacentHTML("beforeend",liste)
+    }
+    document.getElementById('silinicekObje').remove();//remove ile ulaştığınız elementi silebilirsiniz
+    document.querySelector("#baslik").removeAttribute('id');//sectiğiniz elementin bir özelliğini siler id,class gibi
+    console.log(document.querySelector('.baslik').getAttribute('class'))//sectiğiniz elemanın sectiğiniz özelliğini getirir
+    document.querySelector('.baslik').setAttribute('class','text-white bg-danger');//sectiğiniz elemanın sectiğiniz özelliğine değer atayabilirsiniz
+    document.querySelector('.baslik').classList.add('bg-info')//class bilgisine bg-info ekler
+    document.querySelector('.baslik').classList.remove('bg-info');//class bilgisinden bg-info yu siler
+    console.log(document.querySelector('.baslik').classList.contains('bg-danger'));//class bilgisinde bg-danger sınıfının olup olmadığını control eder true veya false döndürür
+    
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</html>

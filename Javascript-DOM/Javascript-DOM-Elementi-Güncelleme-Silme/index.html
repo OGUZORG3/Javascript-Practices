@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="Liste py-5" style="min-height: 100vh; background-color: darkgray;">
+        <div class="navbar bg-primary">
+            <div class="container justify-content-center">
+                <h1 class="text-white">Görev Listesi</h1>
+            </div>
+        </div>
+        <div id="liste" class="container justify-content-center my-3">
+            <ul class="list-group ">
+                <li class="list-group-item my-3 d-flex justify-content-between">
+                    <label for="">Tamamlama Durumu</label>
+                    <label for="">Görev NO</label>
+                    <label for="">Görev Açıklama</label>
+                    <label for=""> Görev Süre</label>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+
+   let görevListesi = 
+    [
+    {"görevNo": 1,"görevAçıklamam":'lorem ipsum dolor',"görevSüre":3 +'gün'},
+    {"görevNo": 2,"görevAçıklamam":"lorem ipsum dolor","görevSüre":3 +'gün'},
+    {"görevNo": 3,"görevAçıklamam":'lorem ipsum dolor',"görevSüre":3 +'gün'}
+    ]
+    
+    for(let index of görevListesi){
+        let liste = `<li class="list-group-item my-3 d-flex justify-content-between"><input type="checkbox"><label for="">Görev ${index.görevNo} </label><label for="">Görev ${index.görevAçıklamam} </label><label for="">Görev ${index.görevSüre} </label></li>`;
+        document.getElementById('liste').children[0].insertAdjacentHTML("beforeend",liste)
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</html>

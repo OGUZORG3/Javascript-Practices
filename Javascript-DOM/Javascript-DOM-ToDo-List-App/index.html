@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        tbody label.checked{
+            text-decoration: line-through;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="Liste" style="min-height: 100vh; background-color: darkgray;">
+        <nav class="nav justify-content-around align-content-center py-3 bg-primary mb-5">
+            <h1 class="text-warning" href="#" aria-current="page">Görev Listesi</h1>
+        </nav>
+        <div class="container justify-content-center">
+            <div class="row">
+                <div class="col-11">
+                    <form action="">
+                        <div class="input-group">
+                            <button id="btnEkle" type="button" class="btn btn-secondary">Görev Ekle</button>
+                            <input class="form-control" type="text" name="" id="taskText" placeholder="Görev Bilgisi">
+                            <input class="form-control" type="datetime-local" id="taskHour">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-1 ms-0 ps-0">
+                    <div id="btnClear" class="btn btn-danger w-100"><i class="fa fa-trash"></i></div>
+                </div>
+        </div>
+        </div>
+        <div id="liste" class="container justify-content-center my-3">
+            <div class="table-responsive">
+                <table class="table table-primary">
+                    <thead>
+                        <tr >
+                            <th colspan="5" class="text-end" scope="col">
+                                <div class="dropdown open" style="right: 10%;">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                                Filtre
+                                            </button>
+                                    <div class="dropdown-menu filter" aria-labelledby="triggerId">
+                                        <button id="all" class="dropdown-item active" href="#">Hepsi</button>
+                                        <button id="completed" class="dropdown-item" href="#">Tamamlanmış</button>
+                                        <button id="pending" class="dropdown-item" href="#">Sürüyor</button>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr id="baslik">
+                            <th class="baslik" scope="col">Görev NO</th>
+                            <th class="baslik" scope="col">Görev Adı</th>
+                            <th class="baslik" scope="col">Görev Süre</th>
+                            <th class="baslik" scope="col">Kontrol</th>
+                            <th class="baslik" scope="col">işlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Javascript-->
+                    </tbody>
+                    
+                </table>
+                <div id="gorevYok">      
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let durum = 'all';
+    let day = new Date;
+    let editId;
+    let isEditTask = false;
+    const btnClear = document.querySelector('#btnClear');
+    const filter = document.querySelectorAll('.filter button');
+    let gorevListesi = []
+    if (localStorage.getItem("gorevListesi")!=null) {
+        gorevListesi = JSON.parse(localStorage.getItem("gorevListesi"));
+    }
+    TaskWrite(durum);
+    function TaskWrite(status) {
+        document.getElementById('liste').children[0].children[0].children[0].nextElementSibling.innerHTML="";
+        document.querySelector('#gorevYok   ').innerHTML = '';
+        if (gorevListesi.length == 0) {
+            document.querySelector('#gorevYok').innerHTML = '<h1 class="text-center m-5 p-5 text-white">Görev Yok!!</h1>';
+        }
+        else
+        {
+            for(let index of gorevListesi)
+                {
+                    let completed = index.durum == "completed" ? "checked": "";
+                    if (index.durum == status || status == 'all') 
+                    {
+                        let liste = `<tr class="">
+                                        <td scope="row">${index.gorevNo}</td>
+                                        <td><label for="${index.gorevNo}" class="form-check-label ${completed}">${index.gorevAdi}</label></td>
+                                        <td>${index.gorevSure}</td>
+                                        <td><input type="checkbox" onClick="updateStatus(this)" class="checked form-check-input" ${completed} id="${index.gorevNo}"></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                </button>
+                                                <div class="dropdown-menu " aria-labelledby="triggerId">
+                                                    <a onClick="deleteTask(${index.gorevNo})" class="dropdown-item" href="#">Sil</a>
+                                                    <a onClick='editTask(${index.gorevNo},"${index.gorevAdi}")' class="dropdown-item" href="#">Düzenle</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>`;
+                                    document.getElementById('liste').children[0].children[0].children[0].nextElementSibling.insertAdjacentHTML("beforeend",liste)
+                    }            
+                    
+                }   
+            }
+
+        }
+
+   //let btnSize=10;
+    //let btnEkle= document.querySelector('#btnEkle');Görev Ekleme butonumuza erişip bir değişkene aktardık
+   // btnEkle.addEventListener('click',function () {burdada butonumuzda bir click tıklama olayı olduğunda calışıcak fonksiyonu belirttik
+   //     console.log('Butona basıldı')
+    //})
+    document.querySelector('#btnEkle').addEventListener("click",newTask);//burda butona bir event(olay) atıyoruz ilk önce calışma durumu sonrada olayın ismini yazıyoruz
+    function newTask(event) {//sonrada yazdığımız ismi fonksiyon ismine yazıyorz ve fonksiyon butona basılma durumunda calışıcak hale geliyor
+        // console.log("Butona Basıldı");
+        // btnSize++;
+        // console.log(event.target);//burda olayı tetikleyen butona ulaşıyorum
+        // event.target.style.padding = btnSize+'px';//btnSize değikeni ile butonun padding değişkenini büyütüyorum
+        // event.preventDefault();
+        var dateInput = document.getElementById("taskHour").value;
+        var selectedDate = new Date(dateInput);
+        var datetime2 = new Date(); // İkinci datetime türündeki tarih
+        var differenceInMilliseconds = datetime2 - selectedDate; // İki tarih arasındaki farkı hesapla (milisaniye cinsinden)
+        var differenceInSeconds = differenceInMilliseconds / 1000; // Saniye cinsinden farkı hesapla
+        var differenceInMinutes = differenceInSeconds / 60; // Dakika cinsinden farkı hesapla
+        var differenceInHours = differenceInMinutes / 60; // Saat cinsinden farkı hesapla
+        console.log(dateInput);
+        if (dateInput == '') {
+            alert('Tarih secilmedi')
+        }
+        else if(document.getElementById("taskText").value == ''){
+           alert('Görev bilgisi boş')
+        }
+        else{
+            if (!isEditTask) {
+                gorevListesi.push({"gorevNo":gorevListesi.length+1,"gorevAdi":document.getElementById("taskText").value,"gorevSure":(differenceInHours.toFixed(0)*-1)+" saat "+((differenceInMinutes.toFixed(0)%60)*-1)+" dakika","durum":'pending'})
+                TaskWrite(durum);
+                console.log(durum);
+                localStorage.setItem("gorevListesi",JSON.stringify(gorevListesi));
+            }
+            else{
+                for(let gorev of gorevListesi)
+                {
+                    if(gorev.gorevNo == editId)
+                    {
+                        gorev.gorevAdi = document.getElementById("taskText").value;
+                        gorev.gorevSure = (differenceInHours.toFixed(0)*-1)+" saat "+((differenceInMinutes.toFixed(0)%60)*-1)+" dakika";
+                        
+                    }
+                    isEditTask == false;
+                }
+                TaskWrite();
+                localStorage.setItem("gorevListesi",JSON.stringify(gorevListesi))
+            }
+        }
+    }
+    function deleteTask(gorevNo){
+        let deletedId;
+        // for(let index in gorevListesi)
+        // {
+        //     if(gorevListesi[index].gorevNo == gorevNo)
+        //     {
+        //         deletedId = index;
+        //     }
+        // }
+        deletedId = gorevListesi.findIndex(function(index){
+            return index.gorevNo == gorevNo;
+        });
+        console.log(deletedId);
+        gorevListesi.splice(deletedId,1);
+        localStorage.setItem("gorevListesi",JSON.stringify(gorevListesi));
+        TaskWrite();
+    }
+    function editTask(taskId,taskName){
+        editId = taskId;
+        isEditTask = true;
+        document.getElementById("taskText").placeholder = taskName;
+        document.getElementById("taskText").focus();
+        document.getElementById("taskText").classList.add('active')
+    }
+    btnClear.addEventListener('click',function(){
+        gorevListesi.splice(0,gorevListesi.length);
+        localStorage.setItem("gorevListesi",JSON.stringify(gorevListesi))
+        TaskWrite();
+    })
+    function updateStatus(selectedTask){
+       let label = selectedTask.parentElement.previousElementSibling.previousElementSibling.children[0]
+       let durum;
+       if (selectedTask.checked) {
+        label.classList.add('checked');
+        durum = 'completed';
+       }
+       else{
+        label.classList.remove('checked');
+        durum = 'pending';
+       }
+       for(let gorev of gorevListesi) {
+        if(gorev.gorevNo == selectedTask.id)
+        {
+            gorev.durum = durum
+        }
+       }
+       localStorage.setItem("gorevListesi",JSON.stringify(gorevListesi))
+       console.log(gorevListesi)
+    }
+    for(let button of filter)
+    {
+        button.addEventListener("click",function () {
+            document.querySelector('button.active').classList.remove('active');
+            button.classList.add('active')
+            durum = button.id;
+            console.log(durum);
+            TaskWrite(durum);
+        })
+    }
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</html>

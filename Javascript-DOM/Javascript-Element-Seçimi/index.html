@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #333;">
+   <div class="car-header">
+    <h3 class="titleClass secilenEleman titleİd" id="titleİd">Element</h3>
+   </div>
+   <div class="titleİd">
+    <h3 class="secilmeyenEleman" id="Secim2"></h3>
+   </div>
+   <div style="color: wheat;">
+    <h1>Liste</h1>
+    <ul class="liste">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+        <li>item 4</li>
+    </ul>
+    <ul class="liste2">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+        <li>item 4</li>
+    </ul>
+   </div>
+    <script>
+        let sonuc;
+
+        sonuc = document.getElementById('titleİd');// id ile doğrudan etiketin kedisine ulaşıyoruz
+        console.log(sonuc);
+        sonuc = document.getElementById('titleİd').id;//id ile ulaştıkdan sonra id sini getiriyoruz
+        console.log(sonuc);
+        sonuc = document.getElementById('titleİd').className;//sınıf ismini getiriyoruz
+        console.log(sonuc);
+        sonuc = document.getElementById('titleİd').classList;//bulunduğu sınıf lisatesini getiriyoruz
+        console.log(sonuc)
+        document.getElementById('titleİd').style.color = 'cadetblue'; // ulaşmış olduğumuz elementin(etiket) stil ayarlarını değiştirebiliriz
+        document.getElementById('titleİd').style.fontSize = '50px';
+        document.getElementById('titleİd').innerText = 'etiket'; // etiketin icerik kısmınıda depiştirebilriz
+        document.getElementById('titleİd').innerHTML = '<h1>Etiket</h1>' // içerik kısmına html etiketide ekleyebiliriz ama bunun için innerhtml yöntemi kullanımalı innettext ile yapılan elemanlar string olarak agılanıp text olarak eklenicektir
+        sonuc = document.querySelector('.titleİd').classList; // sayfadaki ilk title etiketine sahip elemanı secer
+        document.getElementById('Secim2').innerText = sonuc;
+        //coklu element seciciler
+        let liste = document.querySelectorAll('.liste2 li')//.liste2 sınıfının altındaki li etiketlerinin hepsini getidi ve liste değişkenine attı
+        // let liste2 = document.getElementsByClassName; bu şekildede birde fazla elemnet seçebilirsiniz belirttiğiniz sınıf içindeki tüm elemnetler secilir
+
+        for (let index = 0; index < liste.length; index++) {
+            console.log(liste[index])//sonrada liste değişkenin dizi şeklinde for döngüsü ile yazdırdık            
+        }
+        let i = 0;
+        for (let li of liste){ //burda liste elemanın her bir öğreisini li adında dizi içine aldık
+       
+            i +=1;
+            listeİcerik = li.innerText;//li adında aldığımız dizi öğesinin içindeki yazıyı liste İcerik değişkenine aktardık
+            listeİcerik = "Liste : "+i; //listeİcerik değişkenini günceledik
+            li.innerHTML = "<h1>"+listeİcerik+"</h1>";//li elamanın içerik bilgisini değiştiriyoruz
+            li.style.listStyle = "none"//liste stil özelliğini değiştiriyoruz
+            li.style.color = "cadetblue"//renk stil özelliğini değitiriyoruz
+        }
+        
+    </script>
+</body>
+</html>

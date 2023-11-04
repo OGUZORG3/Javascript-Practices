@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+        <ul id="liste">
+            <li>item 1</li>
+            <li>item 2</li>
+            <li>item 3</li>
+            <li>item 4</li>
+            <li>item 5</li>
+            <li id="ortaListeElemanı">item 6</li>
+            <li>item 7</li>
+            <li>item 8</li>
+            <li>item 9</li>
+            <li>item 10</li>
+        </ul>
+    </div>
+    <script>
+        let container = document.getElementById('container');
+        let liste = document.getElementById('liste');//id üzerinde ul tagını sectik
+        let satirlar = liste.children;//ul un altında bulunan child elemetleri sectik
+        console.log(satirlar);
+        console.log(satirlar[2]);//liste.chideren içeriğine sahip satır değişkeni ile 2 indexdeki chil objeye eriştirk 
+        console.log(liste.firstElementChild);//listenin ilk child elemanına eriştik
+        console.log(liste.lastElementChild);//listenin son chil elemanına eriştik
+        console.log(liste.parentElement);//Parent(Üst) elemente eriştik
+        let satir = document.getElementById('ortaListeElemanı');
+        console.log(satir.nextElementSibling);//satir elemnetinin bir sonraki elemantini sectik
+        console.log(satir.previousElementSibling);//bir önceki elementi 
+        document.write('<ul>');//liste oluşturmak için basşına ve sonuna ul etiketi koydum
+        for(let li of document.getElementById('liste').children)
+        {
+            document.write("<li>"+li.innerHTML+"</li>")//for döngisi ile bir önceki listedeki elemanları ul.chil olarak secip li leri sayfaya bastırdım
+        }
+        document.write('</ul>');
+    </script>
+</body>
+</html>
