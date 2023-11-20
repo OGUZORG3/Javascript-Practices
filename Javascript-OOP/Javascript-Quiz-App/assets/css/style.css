@@ -1,0 +1,121 @@
+body{
+    background:url(../img/bg-1.png) fixed center center;
+    background-size: 110%;
+}
+.btn_start
+{
+    position: absolute;
+    top: 50%;
+    left: 49.75%;
+    transform: translate(-50%,-50%);
+    box-shadow: 0 0 40px red;
+}
+.soru_sayisi{
+    visibility: hidden;
+    top: 0;
+    right: 0;
+    border-bottom: 20px solid red;
+    border-left: 20px solid red;
+    height: 20%;
+    width: 10%;
+    border-bottom-left-radius: 70% ;
+    box-shadow: 0 0 100px 35px red;
+}
+.sure{
+    opacity: 0;
+    top: 0;
+    left: 0;
+    border-bottom: 20px solid red;
+    border-right: 20px solid red;
+    height: 20%;
+    width: 10%;
+    border-bottom-right-radius: 70% ;
+    box-shadow: 0 0 100px 35px red;
+}
+.soru_sayisi h2,p{
+    color: white;
+    text-shadow: 0px 0px 20px white;
+}
+.sure h2,p{
+    color: white;
+    text-shadow: 0px 0px 20px white;
+}
+.quiz_box{
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    min-width: 650px;
+    box-shadow: 0 0 100px 5px red;
+    transition: all 0.8s;
+}
+.score_box{
+    display: none;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    min-width: 300px;
+    box-shadow: 0 0 100px 5px red;
+    transition: all 0.8s;
+}
+
+.active{
+    opacity: 1;
+}
+.deactive{
+    opacity: 0;
+}
+.quiz_box .option-list .option{
+    border: 1px solid rgba(var(--bs-danger-rgb),var(--bs-bg-opacity));
+    border-radius:5px;
+    margin: 10px 0px;
+    padding: 10px 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.quiz_box .option-list .option:hover{
+    background-color:rgba(var(--bs-danger-rgb),var(--bs-bg-opacity));
+    color: #333;
+}
+.quiz_box .option-list .option.correct{
+    color: white;
+    box-shadow: 0 0 15px cadetblue;
+    background-color: rgb(127, 168, 255);
+    border: white;
+}
+.quiz_box .option-list .option.incorrect{
+    color: #333;
+    box-shadow: 0 0 15px cadetblue;
+    background-color: rgb(210, 255, 31);
+    border: white;
+}
+.next{
+    color: azure!important;
+    box-shadow: 0 0 10px black;
+    background-color: #333!important;
+    border: white!important;
+}
+.next:hover{
+    color: #333!important;
+    box-shadow: 0 0 10px white;
+    background-color: #fff!important;
+}
+.prev{
+    color: azure!important;
+    box-shadow: 0 0 10px black;
+    background-color: #333!important;
+    border: white!important;
+}
+.prev:hover{
+    color: #333!important;
+    box-shadow: 0 0 10px white;
+    background-color: #fff!important;
+}
+.disable{
+    pointer-events: none;
+}
