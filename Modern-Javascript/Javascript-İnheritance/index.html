@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class SahneElemani{//burda kalıtım yapıcağımız ana sınıfımızı oluşturuyoruz
+            constructor(elemanİsim,elemanRol,yas){
+                this.elemanİsim = elemanİsim;
+                this.elemanRol = elemanRol;
+                this.yas = yas;
+                console.log(this.yas);
+            }
+            set yas(value){//burayada yaşı nasıl set ediceğimizi belirliyoruz
+                let tarih = new Date().getFullYear();
+                this._yas= tarih - value;
+            }
+            get yas(){
+                return this._yas;
+            }
+        }
+        class Tip extends SahneElemani {//burda SahneElemani sınfında yeni oluşturduğumuz Tip sınıfına kalıtım ile özellik aktardık
+            constructor(elemanİsim,elemanRol,davranisBicimi,yas){//oluşturucu metoduna SahneElamanin daki özellikler + bu sınıfa ait özellikleri yazıyoruz
+                super(elemanİsim,elemanRol,yas);//super metodu  ile yazdığımız SahneElamanı sınıfındaki özellikleri kalıtım yaptığımız sınıfa(SahneElemani) gönderiyoruz
+                this.davranisBicimi = davranisBicimi
+            }
+            kendiniTanit(){
+                console.log(`isim:${this.elemanİsim} rol:${this.elemanRol} yaş:${this.yas} davranış biçimi:${this.davranisBicimi}`)
+            }
+        }
+        class Karakter extends SahneElemani{//Burdada Tip sınfında yaptığımız işlemlerin aynısını yapıyoruz
+            constructor(elemanİsim,elemanRol,yas,elemanDuygu,elemanHikaye){//artık yas özelliği set edilirken gönderdiğimiz SahneElemanı sınıfında
+                super(elemanİsim,elemanRol,yas);//set edilicek ve yaşı hesaplanıcak
+                console.log(yas);
+                this.elemanDuygu = elemanDuygu;
+                this.elemanHikaye = elemanHikaye;
+            }
+            kendiniTanit(){
+                console.log(`isim:${this.elemanİsim}, rol:${this.elemanRol}, yaş:${this.yas}, duygu hali:${this.elemanDuygu}, Hikayasi:${this.elemanHikaye}`)
+            }
+        }
+        let karakter = new Karakter("remzi","aile babası",1985,"depresif","ailesine bakmaya calışan bir baba");
+        karakter.kendiniTanit();
+        let tip = new Tip("Mahmut","Bakkal","Cimri","2000");
+        tip.kendiniTanit();
+    </script>
+</body>
+</html>

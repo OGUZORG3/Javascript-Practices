@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #333;">
+    <script>
+        //class ECS5 sonrası Constructor metot ile obje oluşturman mantığın daha gelişmiş bir versiyonudur
+        class Personeller { // bu şekilde sınıf(class) oluştururuz
+            constructor (isim,soyisim,dogumYili) {//sınıf içinde sınıfdan nesne türetmek için bir consturtor metot oluştururuz
+                this.isim = isim;
+                this.soyisim = soyisim;
+                this.dogumYili = dogumYili;
+            }
+            yasHesapla(){//o sınıfa tanımlı ve o sınftan üretile objelerde kullanmak için bu şekilde bir fonksiyon oluştururz
+                let tarih = new Date().getFullYear();
+                return tarih - this.dogumYili;
+            }
+            
+        }
+        let personel = new Personeller("ahmet","yılar","2000");
+        console.log(personel)
+        console.log(personel.yasHesapla());
+    </script>
+</body>
+</html>

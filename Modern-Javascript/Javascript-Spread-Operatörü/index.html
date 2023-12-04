@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #333;">
+    <script>
+        const words = ['Javascript','Spread','Operatörü'];
+        console.log(...words);//Spread Operatörü dizideki elemanları for döngüsü gibi tek tek yazdırır
+        const number1 = [1,2,3,4,5];
+        const number2 = [6,7,8,9,10];
+        const allNumber = [...number1,...number2];//dizileri birleştirmek içi kullanılır
+        console.log(allNumber)
+        //aynı şekilde bu işlemleri operatör aracılığı ile obje üzerinde gercekleştirebiliriz
+        const identity = {
+            name:"name1",
+            sirname:"sirname1"
+        }
+        const identity1 = {
+            identityNumber:2000000000000,
+            serialNo:2323,
+        }
+        console.log({...identity,...identity1});
+
+        const array = [1,2,3,4];
+        //const array2 = array; bu şekilde kopyalarsanız diziyi kopyalan dizinin bellekteki referansınıda kopyalamış olursunuz
+        const array2 = [...array];// ama bu şekilde kopyalarsanız sadece array'in içindeki değeri kopyalamış olursunuz
+
+
+        function carpim (...sayilar){//fonksiyonlarda bu şekilde kullanımı değişken sayıda değer toplamaya yarar
+            let sonuc =1;
+            sayilar.forEach(sayi => {//carpim fonksiyonuna gelen rastgele sayıdaki değeri foreach ile carpıcak
+                sonuc*=sayi
+            });
+            return sonuc;
+        }
+        console.log(carpim(5,5,5,5));//değerri burda yazdık istediğimiz kadar cok sayı yazabiliriz
+    </script>
+</body>
+</html>

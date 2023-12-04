@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //array destructuring
+        const array = ["isim","soyisim","şehir","0000000000"];
+        let  [name,sirname,city,idetityNo]=array;
+        console.log(name,sirname,city,idetityNo);
+        //object destructuring
+        const object ={
+            value:"Value1",
+            value2:"Value2",
+            value3:"Value3"
+        }
+        let {value,value2,value3} = object;
+        console.log(value,value2,value3);
+    </script>
+</body>
+</html>

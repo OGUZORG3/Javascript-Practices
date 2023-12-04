@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         class Personeller { // bu şekilde sınıf(class) oluştururuz
+            constructor (isim,soyisim,dogumYili) {//sınıf içinde sınıfdan nesne türetmek için bir consturtor metot oluştururuz
+                this.isim = isim;
+                this.soyisim = soyisim;
+                this.dogumYili = dogumYili;
+            }
+            yasHesapla(){//o sınıfa tanımlı ve o sınftan üretile objelerde kullanmak için bu şekilde bir fonksiyon oluştururz
+                let tarih = new Date().getFullYear();
+                return tarih - this.dogumYili;
+            }
+            get isim()//class daki isim parametresine değer atamak için kullanılır
+            {
+                return this._isim;//isim karışıklığını önlemek için alt cizgi koyuyoruz
+            }
+            set isim(value)//class daki isim parametresini class dan cekmek için kullanırız
+            {// isim parametresine gelen değerleri belli kurallara uygun hale getirebilrisiniz
+                let ilkHarf = value.split("")[0];//burda ilk harfi gelen parametreden aldım
+                let kalanHarfler = value.slice(1);//burda kalan harfları aldım
+                this._isim = ilkHarf.toUpperCase()+kalanHarfler.toLowerCase();//burda ilk harfi büyük geri kalan harfleride küçük olarak classa ilettim
+                //artık isim parmetresi nasıl gelirse gelsin baş harfi büyük kalan harfler küçün olucak
+                //set fonksiyonu parametre almak zorundadır 
+            }
+            get dogumYili(){
+                return this._dogumYili;
+            }
+            set dogumYili(value){
+                return this._dogumYili = value;
+            }
+        }
+        let personel = new Personeller("ahmEt","yılar","2000");
+        console.log(personel);
+    </script>
+</body>
+</html>

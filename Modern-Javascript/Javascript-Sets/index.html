@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #333;">
+    <script>
+        const number = new Set();//set yapısı dizilere benzer ve tekil bir veri tipidir aynı değere sahip elemanlar sadece 1 kez yazılır
+        number.add(1);//bu şekilde set yapısına eleman ekleriz
+        number.add(2);
+        number.add(4);
+        console.log(number);
+        number.delete(2)//içindeki değere göre set yapısından bir değer siler
+        console.log(number);
+        console.log(number.has(1));//number set yapısının 1 değerine sahip olum olmadığını sorugular
+        number.clear();//set yapısındaki değerleri tamamen siler
+        number.add(34);
+        number.add(23);
+        for(let num of number){
+            console.log(num);
+        }
+    </script>
+</body>
+</html>

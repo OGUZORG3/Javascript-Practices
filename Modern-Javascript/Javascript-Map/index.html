@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #333;">
+    <script>
+        let kisiler = new Map();//Map objenin daha gelişmiş versiyonudur
+        kisiler.set("1","Ahmet");//key => value olarak map e değer tanımlarız
+        kisiler.set("2","Oğuz");
+        console.log(kisiler);
+        console.log(kisiler.get("2"));//key değerine göre de cağırabiliriz
+        console.log(kisiler.size);//map'in boyutunu verir
+        console.log(kisiler.has("1"));//1 numaralı key in varlığını kontrol eder true veya false döndürür
+        kisiler.delete("1");//1 numaralı key bilgisini siler
+        console.log(kisiler.has("1"));
+        kisiler.clear()//tüm map'i siler geriye değer döndürmez
+        kisiler.set("3","samet");
+        kisiler.set("4","sahan");
+        for(let kisi of kisiler.keys()){
+            console.log(kisi)//map in key değerlerini bastırır
+        }
+        for(let kisi of kisiler.values()){
+            console.log(kisi)//map in value değerlerini bastırır
+        }
+        for(let [key,value] of kisiler.entries()){
+            console.log(value,key)//value ve key değerlerini tek seferde basar
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #333;">
+    <script>
+        const sayilar = [1,2,3,4,5,6,7,8,9,10];//1'den 10'a kadar olan sayı dizisini oluşturduk
+        const tekSayiKontrol = (sayi) => sayi%2==1;//burda bir arrow function oluşturduk içine gelen parmetredek değeri 2 ile modunu alıyor
+        const tekSayilar = sayilar.filter(tekSayiKontrol);//burda önceki oluşturduğumuz diziyi filter metodu ile belirlenen şart ile filtreleme yapılır
+        console.log(tekSayilar);
+        const araclar = [//aracların içinde obje şeklinde olduğu bir dizi oluşturduk
+            {aracMarka:"BMW",aracFiyat:"500000"},
+            {aracMarka:"Mersedes",aracFiyat:"1000000"},
+            {aracMarka:"lamborjini",aracFiyat:"2000000"}
+        ]
+        const aracMarka = araclar.map(araclar => araclar.aracMarka);//map metodu ile arrow function kullanarak aracların markalarına eriştik
+        console.log(aracMarka);
+        const enUcuzFiyat = araclar.filter(araclar => araclar.aracFiyat < 1500000);//filtreye uyan değerleri döndürür
+        console.log(enUcuzFiyat)
+        const aracBul = araclar.find(araclar => araclar.aracFiyat >= 600000 );//filtreye uyan ilk değeri döndürü
+        console.log(aracBul);
+        const aracSira = araclar.findIndex(araclar => araclar.aracFiyat == 500000);//filtreye uyan elemanın indexsini getirir
+        console.log(aracSira);
+    </script>
+</body>
+</html>

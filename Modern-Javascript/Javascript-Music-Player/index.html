@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div id="app" class="app">
+        <section class="section-disk">
+            <div class="disk-box">
+                <div class="play-stick"></div>
+                <div class="disk rotate">
+                    <div class="disk-surface">
+                        <div class="disk-cicrle">
+                            <div class="disk-core"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="music-title">
+                <marquee><span id="title"></span>-<span id="singer">asdsad</span></marquee>
+            </div>
+            <div id="progres">
+                <div class="times" style="width: 100%; display: flex; justify-content: space-between;">
+                    <span id="current-time">00.00</span>
+                    <span id="duration">0:00</span>
+                </div>
+                <input type="range" id="progres-bar">
+                <div class="shadow">
+                    <div class="blue"></div>
+                    <div class="white"></div>
+                    <div class="red"></div>
+                </div>
+            </div>
+        </section>
+        <div class="play-list">
+            <h1>Müzik Listesi</h1>
+            <ul id="music-list">
+            </ul>
+        </div>
+        <div class="player">
+            <div class="music-player">
+                <audio id="audio" src=""></audio>
+                <ul class="player-buttons">
+                        <li id="prev"><button><i class="fa fa-arrow-alt-circle-left"></i></button></li>
+                        <li id="play"><button><i class="fa fa-play-circle"></i></button></li>
+                        <li id="next"><button><i class="fa fa-arrow-alt-circle-right"></i></button></li>
+                </ul>
+                <div class="settings">
+                        <i id="volume" class="fa-solid fa-volume-high"></i>
+                        <input type="range" id="volume-bar" max="100" value="100">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <script src="musicplayer.js"></script>
+    <script src="music.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
