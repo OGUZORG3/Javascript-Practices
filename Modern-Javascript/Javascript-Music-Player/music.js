@@ -10,7 +10,7 @@ class Music {
     }
 }
 const musicList = [
-    new Music("Adriel Rivera - so close (Official Audio)","Adriel Rivera","Plak-background.png","Adriel Rivera - so close (Official Audio).m4a"),
-    new Music("Adele - Someone Like You (Official Music Video)","Adele","back-ground.png","Adele - Someone Like You (Official Music Video).m4a"),
-    new Music("After School (After School)","(After School)","back-ground.png","After School (After School).m4a")
+    new Music("1-Music.mp3","1-Music.mp3","Plak-background.png","1-Music.mp3"),
+    new Music("2-Music.mp3","2-Music.mp3","back-ground.png","2-Music.mp3"),
+    new Music("3-Music.mp3","3-Music.mp3","Plak-background.png","3-Music.mp3")
 ];
