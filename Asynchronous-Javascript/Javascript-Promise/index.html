@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const serverStatus = false;
+        //Promise callback fonksiyonu gibidir ama bize başarılı(resolve)  ve başarısız(reject) olmak üzere 2 yanıt döndürür
+        function login (userName,userMail){
+            return new Promise((resolve,reject) => {//burde bir promise tanımlıyoruz
+            setTimeout(() => {
+                if(serverStatus){//asyc bir işlemi simüle etmek için yukarıda serverStatus(sunucu durumu) olarak bir boolean değişken tanımladım
+                resolve({username:userName,usermail:userMail})//resolve sonucunu bu şekilde tanımlarız
+                }
+                else{
+                reject('sunucu kapalı');//rejecti de buraya yazıyoruz
+                }
+            },1000);})
+        }
+        login('name','mail').then(//then fonksiyonunu promise kullandığımız için kullanabiliriz then resolve sonucunu döndürecek
+            user => {
+                console.log(user)
+                console.log('1 saniye sonra gözükecek olan '+user.username+' '+user.usermail);
+            }
+        ).catch(//catc fonksiyonuda reject sonucunu döndürecek
+            server => {
+                console.log(server);
+            }
+        )
+
+    </script>
+</body>
+</html>

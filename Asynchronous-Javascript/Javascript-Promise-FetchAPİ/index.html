@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //fetc api içinde kendiliğinden promise yapısı olan bir api türüdür 
+            fetch('https://restcountries.com/v3.1/name/Turkey').then((result) => {// fetc fonksiyounu içine apiyi yazdıkdan sonra then ve catch fonksiyonlarını kullanabilirz
+                    //apiden dönen hataları kullanıcının anladığı şekle cevirebiliriz bunun için
+                    // result yani geri dönen yanıtın özelliklerini kullanırız                    
+                  if(!result.ok){// resultun 'ok' özelliğinin false olmasu durumunda aşşağıdaki hatayı fırlatıcak
+                        throw new Error("server hatası");
+                    }
+                return result.json();// gelen değeri json formatına dönüştürdük then ile return ettiğimiz değeri sonraki thende alabilirz
+            }).then((data)=>{
+                console.log(data);//veriyi yazdırdık
+            }).catch((err) => {
+                console.log(err);
+            });
+    </script>
+</body>
+</html>

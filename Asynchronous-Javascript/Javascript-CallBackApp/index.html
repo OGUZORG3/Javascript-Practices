@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color: darkslategrey;">
+    <div class="searc"><span> ÜLKE İSMİ</span><input id="txtSearch" type="text"><button id="btnSearch" type="button" >ARA</button></div>
+    <div class="selectedCountry">
+    </div>
+    <section>
+    </section>
+    <script>
+        document.querySelector('#btnSearch').addEventListener('click',function(){
+            const text =  document.querySelector('#txtSearch').value;
+            document.querySelector('.selectedCountry').style.display = 'grid'
+            getCountry(text);
+        });
+        function getCountry(country){
+            const request = new XMLHttpRequest();      
+            request.open('GET','https://restcountries.com/v3.1/name/'+country);
+            request.send();
+            request.addEventListener('load',function(){
+            const veri = JSON.parse(this.responseText);
+            console.log(veri[0]);
+            renderCountry(veri[0]);
+            const countries = veri[0].borders.toString();
+            const req = new XMLHttpRequest();
+            req.open('GET','https://restcountries.com/v3.1/alpha?codes=' + countries);
+            req.send();
+            req.addEventListener('load',function(){
+                const veri = JSON.parse(this.responseText);
+                renderNeigbors(veri)
+            })
+        });
+        }
+        function renderCountry (data) {
+            
+            let html = `
+                <img src="${data.flags.png}" alt="">
+                <div class="countryDetails">
+                    <h1>${Object.values(data.name.nativeName)[0].common}</h1>
+                    <h1>${data.name.common}</h1>
+                    <hr>
+                    <ul>
+                        <li>Başkent: ${data.capital}</li>
+                        <li>Nufus:${data.population}</li>
+                        <li>Dil:${Object.values(data.languages)}</li>
+                        <li>Kıta:${data.region}</li>
+                        <li>Kıta:${Object.values(data.currencies)[0].name},${Object.values(data.currencies)[0].symbol}</li>
+                    </ul>
+                <div>
+            `;
+            document.querySelector('.selectedCountry').innerHTML = html;
+
+        }
+        function renderNeigbors(data){
+            console.log(data)
+            let neigbors = '';
+            for(let country of data)
+            {
+            const html = `
+                <div class="card">
+                <img src="${country.flags.png}" alt="">
+                <h1>${country.name.common}</h1>
+                <ul>
+                    <li>Başkent:${country.capital}</li>
+                    <li>Nufus:${country.population}</li>
+                    <li>Dil:${Object.values(country.languages)}</li>
+                   <li>Kıta:${country.region}</li>
+                </ul>
+                </div>`;
+                
+                neigbors += html;
+                
+            }
+            document.querySelector("section").innerHTML = neigbors;
+        }
+    </script>
+</body>
+</html>

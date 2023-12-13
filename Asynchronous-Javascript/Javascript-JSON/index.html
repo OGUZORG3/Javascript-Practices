@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card{
+            width: 250px;
+            height: 400px;
+            background: #333;
+            color: white;
+            border-radius: 25px;
+            padding: 10px;
+        }
+        .card img{
+            border-radius: 25px;
+            width: 100%;
+            object-fit: cover;
+            height: 200px;
+            box-shadow: 0 0 5px white;
+        }
+        section{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+    </section>
+    <script>
+        const request = new XMLHttpRequest();// biz burda XMLHttpRequest clasında bir request değişkeni türeticez
+        //https://restcountries.com/v3.1/name/{name}-> name kısmına aratıcağımız ülkenin ismi gelir
+        request.open('GET','https://restcountries.com/v3.1/name/Turkey');//Open fonksiyonunu kullanarak GET ile belirtilen adresden ülke ismi ile veri alıcaz
+        request.send();//http isteğini send ile gönderiyoruz ama isteğin bize veri ile dönmesi zaman alıcaktır
+        //bundan dolayı burda veriyi asyc bir şekilde almamız lazım
+        request.addEventListener('load',function(){//load eventi veri bize geri dönünce calışıcak
+        const veri = JSON.parse(this.response);//gelen veriyi JSON türüne dönüştürüyoruz
+        console.log(veri[0]);
+        setCountry(veri[0]);
+        });
+        function setCountry (data) {
+            const html = `
+                <div class="card">
+                <img src="${data.flags.png}" alt="">
+                <h1>${data.name.nativeName.tur.common}</h1>
+                <ul>
+                    <li>Başkent:${data.capital}</li>
+                    <li>Nufus:${data.population}</li>
+                    <li>Dil:${data.languages.tur}</li>
+                    <li>Kıta:${data.region}</li>
+                </ul>
+                </div>`;
+            document.querySelector("section").insertAdjacentHTML("beforeend",html)
+        }
+    </script>
+</body>
+</html>

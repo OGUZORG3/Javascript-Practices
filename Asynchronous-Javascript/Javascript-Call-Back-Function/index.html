@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const login = (username,password,callback) => {//fonksiyona 3. parametre olarak bir fonksiyon veririrz
+            setTimeout(()=>{
+                callback({username:username,email:"user@gmail.com"});
+            },1000)
+        }
+        const getPostsByUsername = (username,callback) =>{
+            setTimeout(()=>{
+                callback(['post-1','post-2','post-3']);
+            },1000)
+        }
+        login("user1","123",user =>{//fonksiyonu cağıracağımız zaman callback parametresine bir fonksiyon girerek callbackdeki değerlere ulaşabilriz
+            console.log(user.username);//bu sayede callback fonskiyonu gercekleştikden sonra fonskiyon calışır
+            console.log(user.email);
+            getPostsByUsername(user.username,(posts)=>{
+                console.log(posts);
+            });
+        });
+
+    </script>
+</body>
+</html>

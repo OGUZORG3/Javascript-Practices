@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         const serverStatus = true;
+       
+        function login (userName,userMail){
+            return new Promise((resolve,reject) => {
+            setTimeout(() => {
+                if(serverStatus){
+                resolve({username:userName,usermail:userMail})
+                }
+                else{   
+                reject('sunucu kapalı');
+                }
+            },1000);})
+        }
+        const getPostsByUsername = (username) =>{
+            return new Promise((resolve,reject) => {
+            setTimeout(()=>{
+                if(serverStatus){
+                resolve(['post-1','post-2','post-3']);
+                }
+                else{   
+                reject('sunucu kapalı');
+                }
+            },1000)})
+        }
+        async function user(){//async await kullanmak için fonksiyonun başına async yazarız
+            try{//hataları yakalamak için try catc bloğu kullanırız
+            const user = await login('isim1','emai1');//sonucun dönmesinş beliyeceğimz işlem için await yazrız 
+            console.log(user);
+            const post = await getPostsByUsername(user.userName);
+            console.log(post);
+            }
+            catch(error)
+            {
+                console.log(error);//hataları burda yazdırırız
+            }
+        }
+        user();
+    </script>
+</body>
+</html>

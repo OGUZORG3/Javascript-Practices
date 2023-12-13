@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //api kullanarak http isteği ile veri alıcak. Veriler genelde xml veya json formatinda geliyor
+        const request = new XMLHttpRequest();// biz burda XMLHttpRequest clasında bir request değişkeni türeticez
+        //https://restcountries.com/v3.1/name/{name}-> name kısmına aratıcağımız ülkenin ismi gelir
+        request.open('GET','https://restcountries.com/v3.1/name/Turkey');//Open fonksiyonunu kullanarak GET ile belirtilen adresden ülke ismi ile veri alıcaz
+        request.send();//http isteğini send ile gönderiyoruz ama isteğin bize veri ile dönmesi zaman alıcaktır
+        //bundan dolayı burda veriyi asyc bir şekilde almamız lazım
+        request.addEventListener('load',function(){//load eventi veri bize geri dönünce calışıcak
+        console.log(this);//sonra veriyi burda yazdırıcaz
+        });
+    </script>
+</body>
+</html>
